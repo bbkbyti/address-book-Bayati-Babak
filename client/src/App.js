@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+
+import { useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
+import Layout from './layouts/Layout';
+import Login from './screens/Login';
+import { loginUser } from './services/auth';
+
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const navigate = useNavigate();
+
+  const handleLogin = async (loginData) => {
+    const userData = await loginUser(loginData);
+    setCurrentUser(userData);
+    navigate('/');
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Layout>
+        <Routes>
+          <Route exact path='/login' element={<Login handleLogin={handleLogin} />} />
+        </Routes>
+      </Layout>
     </div>
   );
 }
