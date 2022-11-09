@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
+import MainContainer from './containers/MainContainer';
 import Layout from './layouts/Layout';
 import Login from './screens/Login';
 import Register from './screens/Register';
@@ -47,6 +48,7 @@ function App() {
         <Routes>
           <Route exact path='/login' element={<Login handleLogin={handleLogin} />} />
           <Route exact path='/register' element={<Register handleRegister={handleRegister} />} />
+          <Route exact path='*' element={<MainContainer />} />
         </Routes>
       </Layout>
     </div>
