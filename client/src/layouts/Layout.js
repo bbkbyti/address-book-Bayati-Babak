@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 export default function Layout(props) {
-    const { currentUser } = props;
+    const { currentUser, handleLogout } = props;
     return (
         <header>
             <Link to='/'>
@@ -11,6 +11,7 @@ export default function Layout(props) {
             {currentUser ? (
                 <div>
                     <h4>{currentUser.username}</h4>
+                    <button onClick={handleLogout}>Logout</button>
                 </div>
             ) : (
                 <Link to='/login'>Login/Register</Link>

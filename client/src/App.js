@@ -5,7 +5,7 @@ import './App.css';
 import Layout from './layouts/Layout';
 import Login from './screens/Login';
 import Register from './screens/Register';
-import { loginUser, registerUser, verifyUser } from './services/auth';
+import { loginUser, registerUser, removeToken, verifyUser } from './services/auth';
 
 
 function App() {
@@ -33,11 +33,17 @@ function App() {
     handleVerify();
   }, [])
 
+  const handleLogout = () => {
+    setCurrentUser(null);
+    localStorage.removeItem('authToken');
+    removeToken();
+    navigate('/');
+  }
 
 
   return (
     <div className="App">
-      <Layout currentUser={currentUser}>
+      <Layout currentUser={currentUser} handleLogout={handleLogout}>
         <Routes>
           <Route exact path='/login' element={<Login handleLogin={handleLogin} />} />
           <Route exact path='/register' element={<Register handleRegister={handleRegister} />} />
