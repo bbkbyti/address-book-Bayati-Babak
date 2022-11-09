@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom';
 import { getAllPeople } from '../services/people';
 import { getAllAddresses } from '../services/addresses';
 import { getAllEmails } from '../services/emails';
 import { getAllPhones } from '../services/phones';
+import PeopleList from '../screens/PeopleList';
 
 export default function MainContainer() {
     const [peopleList, setPeopleList] = useState([]);
@@ -45,6 +47,10 @@ export default function MainContainer() {
     return (
         <div>
             <h2>Main Container</h2>
+            <Routes>
+                <Route exact path='people' element={<PeopleList peopleList={peopleList} />} />
+            </Routes>
+
         </div>
     )
 }
