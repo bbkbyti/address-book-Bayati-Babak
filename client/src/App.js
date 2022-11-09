@@ -4,7 +4,8 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import Layout from './layouts/Layout';
 import Login from './screens/Login';
-import { loginUser } from './services/auth';
+import Register from './screens/Register';
+import { loginUser, registerUser } from './services/auth';
 
 
 function App() {
@@ -18,12 +19,19 @@ function App() {
     navigate('/');
   }
 
+  const handleRegister = async (registerData) => {
+    const userData = await registerUser(registerData);
+    setCurrentUser(userData)
+    navigate('/');
+  }
+
 
   return (
     <div className="App">
       <Layout>
         <Routes>
           <Route exact path='/login' element={<Login handleLogin={handleLogin} />} />
+          <Route exact path='/register' element={<Register handleRegister={handleRegister} />} />
         </Routes>
       </Layout>
     </div>
