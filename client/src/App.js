@@ -24,11 +24,12 @@ function App() {
     setCurrentUser(userData)
     navigate('/');
   }
+  console.log(currentUser);
 
 
   return (
     <div className="App">
-      <Layout>
+      <Layout currentUser={currentUser}>
         <Routes>
           <Route exact path='/login' element={<Login handleLogin={handleLogin} />} />
           <Route exact path='/register' element={<Register handleRegister={handleRegister} />} />
