@@ -8,8 +8,13 @@ export default function Layout(props) {
             <Link to='/'>
                 <h1>Address Book</h1>
             </Link>
-            <Link to='/login'>Login/Register</Link>
-            <h4>{currentUser.username}</h4>
+            {currentUser ? (
+                <div>
+                    <h4>{currentUser.username}</h4>
+                </div>
+            ) : (
+                <Link to='/login'>Login/Register</Link>
+            )}
             <hr />
             {props.children}
         </header>

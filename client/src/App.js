@@ -1,11 +1,11 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import Layout from './layouts/Layout';
 import Login from './screens/Login';
 import Register from './screens/Register';
-import { loginUser, registerUser } from './services/auth';
+import { loginUser, registerUser, verifyUser } from './services/auth';
 
 
 function App() {
@@ -24,7 +24,15 @@ function App() {
     setCurrentUser(userData)
     navigate('/');
   }
-  console.log(currentUser);
+
+  useEffect(() => {
+    const handleVerify = async () => {
+      const userData = await verifyUser();
+      setCurrentUser(userData);
+    }
+    handleVerify();
+  }, [])
+
 
 
   return (
