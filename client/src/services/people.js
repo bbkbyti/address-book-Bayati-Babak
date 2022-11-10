@@ -12,8 +12,9 @@ export const getOnePerson = async (id) => {
 
 export const addPerson = async (personData) => {
     const resp = await api.post('/people', { person: personData })
-    return resp.data;
+    return resp.data
 }
+
 
 export const editPerson = async (id, personData) => {
     const resp = await api.put(`/people/${id}`, { person: personData })
