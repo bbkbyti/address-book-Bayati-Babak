@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export default function PeopleList(props) {
 
@@ -8,7 +9,9 @@ export default function PeopleList(props) {
         <div>
             {peopleList.map((people) => (
                 <div key={people.id}>
-                    <h4>{people.first_name} {people.last_name}</h4>
+                    <Link to={`/people/${people.id}`}>
+                        <h4>{people.first_name} {people.last_name}</h4>
+                    </Link>
                 </div>
             ))}
         </div>
