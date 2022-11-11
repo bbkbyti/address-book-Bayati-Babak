@@ -1,5 +1,6 @@
 class EmailsController < ApplicationController
   before_action :set_email, only: [:show, :update, :destroy]
+  before_action :authorize_request, only: %i[show update destroy]
 
   # GET /emails
   def index
@@ -16,6 +17,7 @@ class EmailsController < ApplicationController
   # POST /emails
   def create
     @email = Email.new(email_params)
+    @email.user = @current_user
 
     if @email.save
       render json: @email, status: :created, location: @email
@@ -46,6 +48,6 @@ class EmailsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def email_params
-      params.require(:email).permit(:email_address, :comment, :user_id)
+      params.require(:email).permit(:email_address, :comment, :user_id, :person_id)
     end
 end

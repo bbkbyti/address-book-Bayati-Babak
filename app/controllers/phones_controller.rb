@@ -1,5 +1,6 @@
 class PhonesController < ApplicationController
-  before_action :set_phone, only: [:show, :update, :destroy]
+  before_action :set_phone, only: %i[show update destroy]
+  before_action :authorize_request, only: %i[show update destroy]
 
   # GET /phones
   def index
@@ -16,6 +17,7 @@ class PhonesController < ApplicationController
   # POST /phones
   def create
     @phone = Phone.new(phone_params)
+    @phone.user = @current_user
 
     if @phone.save
       render json: @phone, status: :created, location: @phone
@@ -39,13 +41,14 @@ class PhonesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_phone
-      @phone = Phone.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def phone_params
-      params.require(:phone).permit(:phone_number, :comment, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_phone
+    @phone = Phone.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def phone_params
+    params.require(:phone).permit(:phone_number, :comment, :user_id, :person_id)
+  end
 end

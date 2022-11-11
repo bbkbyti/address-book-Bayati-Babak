@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_09_022206) do
+ActiveRecord::Schema.define(version: 2022_11_11_004806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,10 @@ ActiveRecord::Schema.define(version: 2022_11_09_022206) do
     t.string "state"
     t.string "country"
     t.bigint "user_id", null: false
+    t.bigint "person_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_addresses_on_person_id"
     t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
@@ -31,8 +33,10 @@ ActiveRecord::Schema.define(version: 2022_11_09_022206) do
     t.string "email_address"
     t.string "comment"
     t.bigint "user_id", null: false
+    t.bigint "person_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_emails_on_person_id"
     t.index ["user_id"], name: "index_emails_on_user_id"
   end
 
@@ -40,18 +44,18 @@ ActiveRecord::Schema.define(version: 2022_11_09_022206) do
     t.string "salutation"
     t.string "first_name"
     t.string "last_name"
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_people_on_user_id"
   end
 
   create_table "phones", force: :cascade do |t|
     t.string "phone_number"
     t.string "comment"
     t.bigint "user_id", null: false
+    t.bigint "person_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["person_id"], name: "index_phones_on_person_id"
     t.index ["user_id"], name: "index_phones_on_user_id"
   end
 
@@ -63,8 +67,10 @@ ActiveRecord::Schema.define(version: 2022_11_09_022206) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "addresses", "people"
   add_foreign_key "addresses", "users"
+  add_foreign_key "emails", "people"
   add_foreign_key "emails", "users"
-  add_foreign_key "people", "users"
+  add_foreign_key "phones", "people"
   add_foreign_key "phones", "users"
 end
