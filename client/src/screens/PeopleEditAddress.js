@@ -10,7 +10,7 @@ export default function PeopleEditAddress(props) {
         country: '',
     })
     const { id } = useParams();
-    const { addressList } = props
+    const { addressList, handleEditAddress } = props
 
     useEffect(() => {
         const prefillFormDataAddress = () => {
@@ -39,7 +39,10 @@ export default function PeopleEditAddress(props) {
     return (
         <div>
             <h3>PeopleEditAddress</h3>
-            <form>
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                handleEditAddress(id, addressData)
+            }}>
                 <label>
                     Street:
                     <input
@@ -85,6 +88,8 @@ export default function PeopleEditAddress(props) {
                         onChange={handleChange}
                     />
                 </label>
+                <br />
+                <button>Submit</button>
             </form>
         </div>
 

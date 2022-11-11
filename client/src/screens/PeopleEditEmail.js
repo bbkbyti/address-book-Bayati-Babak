@@ -7,7 +7,7 @@ export default function PeopleEditEmail(props) {
         email_address: '',
     })
     const { id } = useParams();
-    const { emailsList } = props;
+    const { emailsList, handleEditEmail } = props;
 
     useEffect(() => {
         const prefillFormDataEmail = () => {
@@ -29,7 +29,10 @@ export default function PeopleEditEmail(props) {
     return (
         <div>
             <h3>PeopleEditEmail</h3>
-            <form>
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                handleEditEmail(id, emailData);
+            }}>
                 <label>
                     Email:
                     <input
@@ -39,6 +42,8 @@ export default function PeopleEditEmail(props) {
                         onChange={handleChange}
                     />
                 </label>
+                <br />
+                <button>Submit</button>
             </form>
         </div>
     )
