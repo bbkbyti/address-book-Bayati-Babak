@@ -6,7 +6,7 @@ export default function PeopleEditPhone(props) {
         phone_number: '',
     })
 
-    const { phonesList } = props
+    const { phonesList, handleEditPhone } = props
     const { id } = useParams();
 
     useEffect(() => {
@@ -31,7 +31,10 @@ export default function PeopleEditPhone(props) {
     return (
         <div>
             <h3>PeopleEditPhone</h3>
-            <form>
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                handleEditPhone(id, phoneData)
+            }}>
                 <label>
                     Phone Number:
                     <input
@@ -41,6 +44,8 @@ export default function PeopleEditPhone(props) {
                         onChange={handleChange}
                     />
                 </label>
+                <br />
+                <button>Submit</button>
             </form>
         </div>
     )

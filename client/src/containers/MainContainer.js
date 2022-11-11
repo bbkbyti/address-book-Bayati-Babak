@@ -3,7 +3,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import { addPerson, editPerson, getAllPeople } from '../services/people';
 import { addAddress, editAddress, getAllAddresses } from '../services/addresses';
 import { editEmail, getAllEmails } from '../services/emails';
-import { getAllPhones } from '../services/phones';
+import { editPhone, getAllPhones } from '../services/phones';
 import PeopleList from '../screens/PeopleList';
 import PeopleDetail from '../screens/PeopleDetail';
 import PeopleCreate from '../screens/PeopleCreate';
@@ -86,6 +86,14 @@ export default function MainContainer(props) {
         fetchAllPhones()
     }, [])
 
+    const handleEditPhone = async (id, formData) => {
+        const phoneData = await editPhone(id, formData);
+        setPhonesList((prevState) => prevState.map((phone) => {
+            return phone.id === Number(id) ? phoneData : phone
+        }))
+        navigate(`/people/${id}`)
+    }
+
     const handleCreate = async (formData) => {
         const personData = await addPerson(formData);
         setPeopleList((prevState) => [...prevState, personData]);
@@ -102,7 +110,7 @@ export default function MainContainer(props) {
                 <Route exact path='/people/:id/edit-address' element={<PeopleEditAddress addressList={addressList} handleEditAddress={handleEditAddress} />} />
                 <Route exact path='/people/:id/edit-name' element={<PeopleEditName peopleList={peopleList} handleEditName={handleEditName} />} />
                 <Route exact path='/people/:id/edit-email' element={<PeopleEditEmail emailsList={emailsList} handleEditEmail={handleEditEmail} />} />
-                <Route exact path='/people/:id/edit-phone' element={<PeopleEditPhone phonesList={phonesList} />} />
+                <Route exact path='/people/:id/edit-phone' element={<PeopleEditPhone phonesList={phonesList} handleEditPhone={handleEditPhone} />} />
             </Routes>
 
         </div>
