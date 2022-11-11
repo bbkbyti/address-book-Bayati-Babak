@@ -53,8 +53,10 @@ puts "#{Address.count} addresses created!"
 
 Email.create!(email_address: Faker::Internet.email, user: @admin, person: @person)
 Email.create!(email_address: Faker::Internet.email, user: @admin2, person: @person2)
+Email.create!(email_address: Faker::Internet.email, user: @admin3, person: @person3)
 puts "#{Email.count} emails created!"
 
 Phone.create!(phone_number: Faker::PhoneNumber.cell_phone, user: @admin, person: @person)
 Phone.create!(phone_number: Faker::PhoneNumber.cell_phone, user: @admin2, person: @person2)
+Phone.create!(phone_number: Faker::PhoneNumber.cell_phone, user: @admin3, person: @person3)
 puts "#{Phone.count} phone numbers created!"
