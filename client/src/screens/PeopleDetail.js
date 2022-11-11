@@ -60,8 +60,17 @@ export default function PeopleDetail(props) {
             <p>Email:{personEmail.email_address}</p>
             {currentUser?.id === addData.user_id && (
                 <div>
-                    <Link to={`/people/${id}/edit`}>
-                        <button>Edit</button>
+                    <Link to={`/people/${id}/edit-name`}>
+                        <button>Edit Name</button>
+                    </Link>
+                    <Link to={`/people/${id}/edit-address`}>
+                        <button>Edit Address</button>
+                    </Link>
+                    <Link to={`/people/${id}/edit-email`}>
+                        <button>Edit Email</button>
+                    </Link>
+                    <Link to={`/people/${id}/edit-phone`}>
+                        <button>Edit Phone</button>
                     </Link>
                     <button>Delete</button>
                 </div>
