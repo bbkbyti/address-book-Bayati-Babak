@@ -8,7 +8,7 @@ export default function PeopleEditName(props) {
         last_name: '',
     })
 
-    const { peopleList } = props
+    const { peopleList, handleEdit } = props
     const { id } = useParams();
 
     useEffect(() => {
@@ -31,7 +31,10 @@ export default function PeopleEditName(props) {
     return (
         <div>
             <h3>PeopleEditName</h3>
-            <form>
+            <form onSubmit={(e) => {
+                e.preventDefault();
+                handleEdit(id, nameData)
+            }}>
                 <label>
                     Salutation:
                     <input
@@ -59,6 +62,8 @@ export default function PeopleEditName(props) {
                         onChange={handleChange}
                     />
                 </label>
+                <br />
+                <button>Submit</button>
             </form>
         </div>
     )

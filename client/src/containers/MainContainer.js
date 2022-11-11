@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { addPerson, getAllPeople } from '../services/people';
+import { addPerson, editPerson, getAllPeople } from '../services/people';
 import { addAddress, getAllAddresses } from '../services/addresses';
 import { getAllEmails } from '../services/emails';
 import { getAllPhones } from '../services/phones';
@@ -31,6 +31,17 @@ export default function MainContainer(props) {
         fetchPeople();
     }, [])
 
+    const handleEdit = async (id, formData) => {
+        const personNameData = await editPerson(id, formData);
+        setPeopleList((prevState) => prevState.map((person) => {
+            return person.id === Number(id) ? personNameData : person
+        }))
+        navigate('/people')
+    }
+
+
+    // ADDRESS:
+
     useEffect(() => {
         const fetchAddresses = async () => {
             const addressList = await getAllAddresses()
@@ -39,6 +50,8 @@ export default function MainContainer(props) {
         fetchAddresses();
     }, [])
 
+    // EMAILS:
+
     useEffect(() => {
         const fetchAllEmails = async () => {
             const allEmails = await getAllEmails()
@@ -46,6 +59,8 @@ export default function MainContainer(props) {
         }
         fetchAllEmails()
     }, [])
+
+    // PHONE NUMBERS:
 
     useEffect(() => {
         const fetchAllPhones = async () => {
@@ -69,7 +84,7 @@ export default function MainContainer(props) {
                 <Route exact path='/people/:id' element={<PeopleDetail currentUser={currentUser} />} />
                 <Route exact path='people/new' element={<PeopleCreate handleCreate={handleCreate} />} />
                 <Route exact path='/people/:id/edit-address' element={<PeopleEditAddress addressList={addressList} />} />
-                <Route exact path='/people/:id/edit-name' element={<PeopleEditName peopleList={peopleList} />} />
+                <Route exact path='/people/:id/edit-name' element={<PeopleEditName peopleList={peopleList} handleEdit={handleEdit} />} />
                 <Route exact path='/people/:id/edit-email' element={<PeopleEditEmail emailsList={emailsList} />} />
                 <Route exact path='/people/:id/edit-phone' element={<PeopleEditPhone phonesList={phonesList} />} />
             </Routes>
