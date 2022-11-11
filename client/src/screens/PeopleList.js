@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function PeopleList(props) {
 
-    const { peopleList } = props;
+    const { peopleList, currentUser } = props;
 
     return (
         <div>

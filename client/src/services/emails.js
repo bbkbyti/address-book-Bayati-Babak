@@ -6,7 +6,7 @@ export const getAllEmails = async () => {
 }
 
 export const getOneEmail = async (id) => {
-    const resp = await api.get(`/emails${id}`)
+    const resp = await api.get(`/emails/${id}`)
     return resp.data
 }
 
