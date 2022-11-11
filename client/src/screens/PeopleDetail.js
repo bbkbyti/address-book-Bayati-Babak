@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom'
 import { getOneAddress } from '../services/addresses';
 import { getOneEmail } from '../services/emails';
@@ -34,7 +35,6 @@ export default function PeopleDetail(props) {
     useEffect(() => {
         const fetchPersonEmail = async () => {
             const emailData = await getOneEmail(id)
-            console.log(emailData)
             setPersonEmail(emailData)
         }
         fetchPersonEmail();
@@ -59,7 +59,12 @@ export default function PeopleDetail(props) {
             <p>Phone Number:{personPhone.phone_number}</p>
             <p>Email:{personEmail.email_address}</p>
             {currentUser?.id === addData.user_id && (
-                <button>Edit/Delete</button>
+                <div>
+                    <Link to={`/people/${id}/edit`}>
+                        <button>Edit</button>
+                    </Link>
+                    <button>Delete</button>
+                </div>
             )}
 
         </div>

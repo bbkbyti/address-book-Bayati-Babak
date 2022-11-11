@@ -7,6 +7,7 @@ import { getAllPhones } from '../services/phones';
 import PeopleList from '../screens/PeopleList';
 import PeopleDetail from '../screens/PeopleDetail';
 import PeopleCreate from '../screens/PeopleCreate';
+import PeopleEdit from '../screens/PeopleEdit';
 
 export default function MainContainer(props) {
     const [peopleList, setPeopleList] = useState([]);
@@ -64,6 +65,7 @@ export default function MainContainer(props) {
                 <Route exact path='/people' element={<PeopleList currentUser={currentUser} peopleList={peopleList} />} />
                 <Route exact path='/people/:id' element={<PeopleDetail currentUser={currentUser} />} />
                 <Route exact path='people/new' element={<PeopleCreate handleCreate={handleCreate} />} />
+                <Route exact path='/people/:id/edit' element={<PeopleEdit addressList={addressList} />} />
             </Routes>
 
         </div>
