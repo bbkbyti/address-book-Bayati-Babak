@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function PeopleEditEmail(props) {
 
@@ -7,7 +8,7 @@ export default function PeopleEditEmail(props) {
         email_address: '',
     })
     const { id } = useParams();
-    const { emailsList, handleEditEmail } = props;
+    const { emailsList, handleEditEmail, handleDeleteEmail } = props;
 
     useEffect(() => {
         const prefillFormDataEmail = () => {
@@ -43,7 +44,11 @@ export default function PeopleEditEmail(props) {
                     />
                 </label>
                 <br />
-                <button>Submit</button>
+                <button>Edit</button>
+                <Link to={`/people/${id}`}>
+                    <button onClick={() => handleDeleteEmail(emailData.id)}>Delete</button>
+                </Link>
+
             </form>
         </div>
     )
