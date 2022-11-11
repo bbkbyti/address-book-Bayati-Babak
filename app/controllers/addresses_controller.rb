@@ -1,5 +1,6 @@
 class AddressesController < ApplicationController
-  before_action :set_address, only: [:show, :update, :destroy]
+  before_action :set_address, only: %i[show update destroy]
+  before_action :authorize_request, only: %i[show update destroy]
 
   # GET /addresses
   def index
@@ -16,6 +17,7 @@ class AddressesController < ApplicationController
   # POST /addresses
   def create
     @address = Address.new(address_params)
+    @address.user = @current_user
 
     if @address.save
       render json: @address, status: :created, location: @address
@@ -39,13 +41,14 @@ class AddressesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_address
-      @address = Address.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def address_params
-      params.require(:address).permit(:street, :town, :zip_code, :state, :country, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_address
+    @address = Address.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def address_params
+    params.require(:address).permit(:street, :town, :zip_code, :state, :country, :user_id, :person_id)
+  end
 end

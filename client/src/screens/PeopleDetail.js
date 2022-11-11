@@ -29,11 +29,8 @@ export default function PeopleDetail(props) {
     return (
         <div>
             <h3>{personName.first_name} {personName.last_name}</h3>
-            <p>Street: {addData.street}</p>
+            <p>Street: {addData.street} </p>
             <p>Town: {addData.town}</p>
-            <p>Zip Code: {addData.zip_code}</p>
-            <p>State: {addData.state}</p>
-            <p>Country: {addData.country}</p>
         </div>
     )
 }

@@ -26,6 +26,13 @@ export default function MainContainer() {
         fetchPeople();
     }, [])
 
+    useEffect(() => {
+        const fetchAddresses = async () => {
+            const addressList = await getAllAddresses()
+            setAddressList(addressList)
+        }
+        fetchAddresses();
+    }, [])
 
 
     const handleCreate = async (formData) => {
