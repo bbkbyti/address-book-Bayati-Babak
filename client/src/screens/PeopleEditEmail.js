@@ -48,7 +48,6 @@ export default function PeopleEditEmail(props) {
                 <Link to={`/people/${id}`}>
                     <button onClick={() => handleDeleteEmail(emailData.id)}>Delete</button>
                 </Link>
-
             </form>
         </div>
     )

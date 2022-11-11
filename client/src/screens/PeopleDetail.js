@@ -63,7 +63,7 @@ export default function PeopleDetail(props) {
                 <div>
                     <p>Email: No emails!</p>
                     {currentUser?.id === addData.user_id && (
-                        <Link>
+                        <Link to='/people/new-email'>
                             <p>Add Email!</p>
                         </Link>
                     )}
