@@ -12,7 +12,6 @@ export default function PeopleDetail(props) {
     const [personEmail, setPersonEmail] = useState([]);
     const [personPhone, setPersonPhone] = useState([]);
 
-    // const { } = props;
     const { id } = useParams();
     const { currentUser } = props;
 

@@ -8,7 +8,7 @@ export default function PeopleEditName(props) {
         last_name: '',
     })
 
-    const { peopleList, handleEdit } = props
+    const { peopleList, handleEditName } = props
     const { id } = useParams();
 
     useEffect(() => {
@@ -33,7 +33,7 @@ export default function PeopleEditName(props) {
             <h3>PeopleEditName</h3>
             <form onSubmit={(e) => {
                 e.preventDefault();
-                handleEdit(id, nameData)
+                handleEditName(id, nameData)
             }}>
                 <label>
                     Salutation:
