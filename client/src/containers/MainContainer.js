@@ -65,7 +65,7 @@ export default function MainContainer(props) {
                 <Route exact path='/people' element={<PeopleList currentUser={currentUser} peopleList={peopleList} />} />
                 <Route exact path='/people/:id' element={<PeopleDetail currentUser={currentUser} />} />
                 <Route exact path='people/new' element={<PeopleCreate handleCreate={handleCreate} />} />
-                <Route exact path='/people/:id/edit' element={<PeopleEdit addressList={addressList} />} />
+                <Route exact path='/people/:id/edit' element={<PeopleEdit addressList={addressList} peopleList={peopleList} emailsList={emailsList} phonesList={phonesList} />} />
             </Routes>
 
         </div>
