@@ -34,6 +34,7 @@ export default function PeopleDetail(props) {
     useEffect(() => {
         const fetchPersonEmail = async () => {
             const emailData = await getOneEmail(id)
+            console.log(emailData);
             setPersonEmail(emailData)
         }
         fetchPersonEmail();
@@ -56,7 +57,20 @@ export default function PeopleDetail(props) {
             <p>State: {addData.state}</p>
             <p>Country: {addData.country}</p>
             <p>Phone Number:{personPhone.phone_number}</p>
-            <p>Email:{personEmail.email_address}</p>
+            {personEmail.email_address ? (
+                <p>Email:{personEmail.email_address}</p>
+            ) : (
+                <div>
+                    <p>Email: No emails!</p>
+                    {currentUser?.id === addData.user_id && (
+                        <Link>
+                            <p>Add Email!</p>
+                        </Link>
+                    )}
+                </div>
+
+            )}
+
             {currentUser?.id === addData.user_id && (
                 <div>
                     <Link to={`/people/${id}/edit-name`}>
