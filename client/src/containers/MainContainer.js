@@ -74,7 +74,6 @@ export default function MainContainer(props) {
     useEffect(() => {
         const fetchAllEmails = async () => {
             const allEmails = await getAllEmails()
-            console.log(allEmails);
             setEmailsList(allEmails)
         }
         fetchAllEmails()
@@ -126,7 +125,7 @@ export default function MainContainer(props) {
                 <Route exact path='/people' element={<PeopleList currentUser={currentUser} peopleList={peopleList} />} />
                 <Route exact path='/people/:id' element={<PeopleDetail currentUser={currentUser} />} />
                 <Route exact path='/people/new' element={<PeopleCreate handleCreate={handleCreate} />} />
-                <Route exact path='/people/new-email' element={<PeopleCreateEmail handleCreateEmail={handleCreateEmail} />} />
+                <Route exact path='/people/:id/new-email' element={<PeopleCreateEmail handleCreateEmail={handleCreateEmail} peopleList={peopleList} />} />
                 <Route exact path='/people/:id/edit-address' element={<PeopleEditAddress addressList={addressList} handleEditAddress={handleEditAddress} handleDeleteAddress={handleDeleteAddress} />} />
                 <Route exact path='/people/:id/edit-name' element={<PeopleEditName peopleList={peopleList} handleEditName={handleEditName} />} />
                 <Route exact path='/people/:id/edit-email' element={<PeopleEditEmail emailsList={emailsList} handleEditEmail={handleEditEmail} handleDeleteEmail={handleDeleteEmail} />} />
