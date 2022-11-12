@@ -19,7 +19,7 @@ puts "#{User.count} users created!"
 
 @person = Person.create!(salutation: 'Mr', first_name: 'Simba', last_name: 'King')
 @person2 = Person.create!(salutation: 'Mr', first_name: 'Zazu', last_name: 'East')
-@person3 = Person.create!(salutation: 'Mr', first_name: 'Mumbaa', last_name: 'North')
+@person3 = Person.create!(salutation: 'Mr', first_name: 'Pumbaa', last_name: 'North')
 puts "#{Person.count} people created!"
 
 Address.create!(

@@ -74,22 +74,23 @@ export default function MainContainer(props) {
     useEffect(() => {
         const fetchAllEmails = async () => {
             const allEmails = await getAllEmails()
+            console.log(allEmails);
             setEmailsList(allEmails)
         }
         fetchAllEmails()
     }, [])
 
     const handleEditEmail = async (id, formData) => {
-        const emailData = await editEmail(id, formData);
-        setEmailsList((prevStat) => prevStat.map((email) => {
-            return email.id === Number(id) ? emailData : email
-        }))
+        const emailData = await editEmail(formData);
+        setEmailsList((prevState) => [...prevState, emailData])
         navigate(`/people/${id}`)
     }
 
-    const handleCreateEmail = async (formData) => {
-        const personEmail = await addEmail(formData)
-        setEmailsList((prevState) => [...prevState, personEmail])
+    const handleCreateEmail = async (person_id, formData) => {
+        const personEmail = await addEmail(person_id, formData)
+        setEmailsList(prevState => prevState.map((email) => {
+            return email.id === Number(person_id) ? personEmail : email
+        }))
         navigate(`/people/${id}`)
     }
 

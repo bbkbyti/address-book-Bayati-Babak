@@ -1,6 +1,6 @@
 class EmailsController < ApplicationController
   before_action :set_email, only: %i[show update destroy]
-  before_action :authorize_request, only: %i[show update destroy]
+  before_action :authorize_request, only: %i[create update destroy]
 
   # GET /emails
   def index
@@ -20,7 +20,7 @@ class EmailsController < ApplicationController
     @email.user = @current_user
 
     if @email.save
-      render json: @email, status: :created, location: @email
+      render json: @email, status: :created
     else
       render json: @email.errors, status: :unprocessable_entity
     end

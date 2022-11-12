@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom'
 
 export default function PeopleCreateEmail(props) {
+
     const [emailData, setEmailData] = useState({
         email_address: '',
         comment: '',
     })
-    const { email_address, comment } = emailData;
+    const { email_address, comment, person_id } = emailData;
     const { handleCreateEmail } = props;
 
     const handleChange = (e) => {
