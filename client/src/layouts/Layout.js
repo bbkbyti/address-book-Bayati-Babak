@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Layout(props) {
     const { currentUser, handleLogout } = props;
@@ -14,7 +16,7 @@ export default function Layout(props) {
                         <h4>All People</h4>
                     </Link>
                     <h4>{currentUser.username}</h4>
-                    <button onClick={handleLogout}>Logout</button>
+                    <Button onClick={handleLogout}>Logout</Button>
                 </div>
             ) : (
                 <Link to='/login'>Login/Register</Link>
