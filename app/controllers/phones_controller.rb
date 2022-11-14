@@ -1,6 +1,6 @@
 class PhonesController < ApplicationController
   before_action :set_phone, only: %i[show update destroy]
-  before_action :authorize_request, only: %i[show update destroy]
+  before_action :authorize_request, only: %i[create update destroy]
 
   # GET /phones
   def index

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Button } from 'react-bootstrap';
 
 export default function Register(props) {
     const [formData, setFormData] = useState({
@@ -54,7 +55,7 @@ export default function Register(props) {
                 />
             </label>
             <br />
-            <button>Submit</button>
+            <Button>Submit</Button>
         </form>
     );
 }

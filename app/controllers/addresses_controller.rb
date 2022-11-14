@@ -1,6 +1,6 @@
 class AddressesController < ApplicationController
   before_action :set_address, only: %i[show update destroy]
-  before_action :authorize_request, only: %i[show update destroy]
+  before_action :authorize_request, only: %i[create update destroy]
 
   # GET /addresses
   def index

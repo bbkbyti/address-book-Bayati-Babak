@@ -1,6 +1,6 @@
 class EmailsController < ApplicationController
-  before_action :set_email, only: [:show, :update, :destroy]
-  before_action :authorize_request, only: %i[show update destroy]
+  before_action :set_email, only: %i[show update destroy]
+  before_action :authorize_request, only: %i[create update destroy]
 
   # GET /emails
   def index
@@ -20,7 +20,7 @@ class EmailsController < ApplicationController
     @email.user = @current_user
 
     if @email.save
-      render json: @email, status: :created, location: @email
+      render json: @email, status: :created
     else
       render json: @email.errors, status: :unprocessable_entity
     end
@@ -41,13 +41,14 @@ class EmailsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_email
-      @email = Email.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def email_params
-      params.require(:email).permit(:email_address, :comment, :user_id, :person_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_email
+    @email = Email.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def email_params
+    params.require(:email).permit(:email_address, :comment, :user_id, :person_id)
+  end
 end

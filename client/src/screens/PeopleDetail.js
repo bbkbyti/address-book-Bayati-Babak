@@ -6,6 +6,9 @@ import { getOneEmail } from '../services/emails';
 import { getOnePerson } from '../services/people';
 import { getOnePhone } from '../services/phones';
 
+import { Button, Card } from 'react-bootstrap';
+
+
 export default function PeopleDetail(props) {
     const [addData, setAddData] = useState([]);
     const [personName, setPersonName] = useState([]);
@@ -34,6 +37,7 @@ export default function PeopleDetail(props) {
     useEffect(() => {
         const fetchPersonEmail = async () => {
             const emailData = await getOneEmail(id)
+            console.log(emailData);
             setPersonEmail(emailData)
         }
         fetchPersonEmail();
@@ -49,31 +53,51 @@ export default function PeopleDetail(props) {
 
     return (
         <div>
-            <h3>{personName.first_name} {personName.last_name}</h3>
-            <p>Street: {addData.street}</p>
-            <p>Town: {addData.town}</p>
-            <p>Zip code: {addData.zip_code}</p>
-            <p>State: {addData.state}</p>
-            <p>Country: {addData.country}</p>
-            <p>Phone Number:{personPhone.phone_number}</p>
-            <p>Email:{personEmail.email_address}</p>
+            <Card style={{ color: '#000' }}>
+                <Card.Body>
+                    <Card.Title>
+                        {personName.first_name} {personName.last_name}
+                    </Card.Title>
+                    <Card.Text>
+                        <p>Street: {addData.street}</p>
+                        <p>Town: {addData.town}</p>
+                        <p>Zip code: {addData.zip_code}</p>
+                        <p>State: {addData.state}</p>
+                        <p>Country: {addData.country}</p>
+                        <p>Phone Number:{personPhone.phone_number}</p>
+
+                        {personEmail.email_address ? (
+                            <p>Email:{personEmail.email_address}</p>
+                        ) : (
+                            <div>
+                                <p>Email: No emails!</p>
+                                {currentUser?.id === addData.user_id && (
+                                    <Link to='/people/new-email'>
+                                        <p>Add Email!</p>
+                                    </Link>
+                                )}
+                            </div>
+                        )}
+                    </Card.Text>
+                </Card.Body>
+            </Card>
             {currentUser?.id === addData.user_id && (
                 <div>
                     <Link to={`/people/${id}/edit-name`}>
-                        <button>Edit Name</button>
+                        <Button>Edit Name</Button>
                     </Link>
                     <Link to={`/people/${id}/edit-address`}>
-                        <button>Edit Address</button>
+                        <Button>Edit Address</Button>
                     </Link>
                     <Link to={`/people/${id}/edit-email`}>
-                        <button>Edit Email</button>
+                        <Button>Edit Email</Button>
                     </Link>
                     <Link to={`/people/${id}/edit-phone`}>
-                        <button>Edit Phone</button>
+                        <Button>Edit Phone</Button>
                     </Link>
-                    <button>Delete</button>
                 </div>
             )}
+
 
         </div>
     )

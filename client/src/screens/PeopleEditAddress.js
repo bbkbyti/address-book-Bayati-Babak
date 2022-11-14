@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 export default function PeopleEditAddress(props) {
     const [addressData, setAddressData] = useState({
@@ -10,11 +10,12 @@ export default function PeopleEditAddress(props) {
         country: '',
     })
     const { id } = useParams();
-    const { addressList, handleEditAddress } = props
+    const { addressList, handleEditAddress, handleDeleteAddress } = props
 
     useEffect(() => {
         const prefillFormDataAddress = () => {
             const addressItem = addressList.find((add) => add.id === Number(id));
+            console.log(addressItem);
             setAddressData({
                 street: addressItem.street,
                 town: addressItem.town,
@@ -89,7 +90,11 @@ export default function PeopleEditAddress(props) {
                     />
                 </label>
                 <br />
-                <button>Submit</button>
+                <button>Edit</button>
+                <Link to={`/people/${id}`}>
+                    <button onClick={() => handleDeleteAddress(addressData.id)}>Delete</button>
+                </Link>
+
             </form>
         </div>
 

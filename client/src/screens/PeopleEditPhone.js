@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function PeopleEditPhone(props) {
     const [phoneData, setPhoneData] = useState({
@@ -45,7 +47,7 @@ export default function PeopleEditPhone(props) {
                     />
                 </label>
                 <br />
-                <button>Submit</button>
+                <Button>Submit</Button>
             </form>
         </div>
     )

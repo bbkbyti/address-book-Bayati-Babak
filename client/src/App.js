@@ -7,13 +7,15 @@ import Layout from './layouts/Layout';
 import Login from './screens/Login';
 import Register from './screens/Register';
 import { loginUser, registerUser, removeToken, verifyUser } from './services/auth';
+import { useParams } from 'react-router-dom';
 
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-
   const navigate = useNavigate();
+  const { id } = useParams()
 
+  console.log(id)
   const handleLogin = async (loginData) => {
     const userData = await loginUser(loginData);
     setCurrentUser(userData);
